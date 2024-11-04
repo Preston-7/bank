@@ -67,10 +67,14 @@ class Bank:
         else:
             print(f"\nAccount ID {account_id} not found.")
 
-    def display_accounts(self):
-        for account in self.accounts.values():
-            print()
-            print(account)
+    def display_accounts(self, account_id=None):
+        if account_id == "admin":
+            for account in self.accounts.values():
+                print(account)
+        elif account_id in self.accounts:
+            print(self.accounts[account_id])
+        else:
+            print("Account ID not found.")
 
 def main():
     bank = Bank()
@@ -119,8 +123,9 @@ def main():
                 print('Please enter a numeric value only.')
 
         elif choice == '5':
-            bank.display_accounts()
-
+            account_id = input('\nEnter your ID credentials: ')
+            bank.display_accounts(account_id)
+                                  
         elif choice == '6':
             bank.save_accounts()
             print("Accounts saved. Exiting.")
